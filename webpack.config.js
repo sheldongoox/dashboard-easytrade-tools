@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const base = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-  devtool: 'cheap-module-source-map',
+  devtool: false, // 'inline-nosources-cheap-module-source-map',
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
     extensions: ['.ts', '.tsx', '.js', '.json'],
@@ -63,7 +63,7 @@ if (process.env.NODE_ENV === 'production') {
       library: 'laputarednerer',
       libraryTarget: 'umd',
     },
-    devtool: 'none',
+    devtool: false,
     externals: {
       'react': 'react',
       'react-dom': 'react-dom'
@@ -94,5 +94,7 @@ if (process.env.NODE_ENV === 'production') {
     },
   }
 }
-
+if (process.env.NODE_ENV === 'development') {
+  baseConfig.devtool = 'inline-source-map';
+}
 module.exports = tempConfig;
